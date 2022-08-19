@@ -9,7 +9,7 @@ description: 'Blog my life'
 keywords: life & code & love
 author: Winson
 language: en
-timezone: 'shanghai'
+timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
@@ -98,7 +98,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: hexo-theme-one-paper
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
@@ -106,9 +106,8 @@ deploy:
   type: git
   repo:
     github:
-      url: https://github.com/Winson-030/myHexoDiary.git
+      url: git@github.com:Winson-030/myHexoDiary.git
       branch: gh-pages 
-      token: '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'
   message: 
   name: Winson-030
   email: a623719265@gmail.com  

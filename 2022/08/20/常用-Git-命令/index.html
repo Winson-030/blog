@@ -43,21 +43,21 @@
     
 
     <div class="post-md">
-        <p>Merge和rebase都是合并历史记录，但是各自的特征不同。</p>
+        <p><code>Merge</code>和<code>rebase</code>都是合并历史记录，但是各自的特征不同。</p>
 <ul>
 <li><strong>merge</strong>保持修改内容的历史记录，但是历史记录会很复杂。</li>
 <li><strong>rebase</strong>历史记录简单，是在原有提交的基础上将差异内容反映进去。因此，可能导致原本的提交内容无法正常运行。</li>
 </ul>
 <p>您可以根据开发团队的需要分别使用merge和rebase。例如，想简化历史记录，</p>
 <ul>
-<li>在topic分支中更新merge分支的最新代码，请使用rebase。</li>
-<li>向merge分支导入topic分支的话，先使用rebase，再使用merge。</li>
+<li>在<code>topic</code>分支中更新<code>merge</code>分支的最新代码，请使用<code>rebase</code>。</li>
+<li>向merge分支导入<code>topic</code>分支的话，先使用<code>rebase</code>，再使用<code>merge</code>。</li>
 </ul>
 <p>一般的仓库分支</p>
 <p>主分支有两种：<strong>master分支</strong>和<strong>develop分支</strong></p>
 <ul>
-<li><strong>master</strong>master分支只负责管理发布的状态。在提交时使用标签记录发布版本号。</li>
-<li><strong>develop</strong>develop分支是针对发布的日常开发分支。刚才我们已经讲解过有合并分支的功用。</li>
+<li><strong>master</strong>分支只负责管理发布的状态。在提交时使用标签记录发布版本号。</li>
+<li><strong>develop</strong>分支是针对发布的日常开发分支。刚才我们已经讲解过有合并分支的功用。</li>
 </ul>
 <p>特性分支就是我们在前面讲解过的<strong>topic分支</strong>的功用。</p>
 <p>这个分支是针对新功能的开发，在bug修正的时候从develop分支分叉出来的。基本上不需要共享特性分支的操作，所以不需要远端控制。完成开发后，把分支合并回develop分支后发布。</p>

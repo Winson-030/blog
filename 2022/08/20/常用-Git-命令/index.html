@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/myHexoDiary/img/favicon.png">
+    <title>Winson-dev&#39;s blog | Welcome to my blog!</title>
+    
+<link rel="stylesheet" href="/myHexoDiary/css/reset.css">
+
+    
+<link rel="stylesheet" href="/myHexoDiary/css/style.css">
+
+    
+<link rel="stylesheet" href="/myHexoDiary/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/myHexoDiary/css/fonts.css">
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <a class="logo" href="/myHexoDiary/">Winson-dev&#39;s blog</a>
+    <a class="go-home" href="/myHexoDiary/">
+        <svg width="8" height="14" viewBox="0 0 8 14">
+            <path d="M7 1L1 7l6 6" stroke="#000" stroke-width="2" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </a>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-main-title">
+            常用 Git 命令
+        </div>
+        <div class="post-meta">
+            2022-08-20
+        </div>
+    
+
+    <div class="post-md">
+        <p>Merge和rebase都是合并历史记录，但是各自的特征不同。</p>
+<ul>
+<li><strong>merge</strong>保持修改内容的历史记录，但是历史记录会很复杂。</li>
+<li><strong>rebase</strong>历史记录简单，是在原有提交的基础上将差异内容反映进去。因此，可能导致原本的提交内容无法正常运行。</li>
+</ul>
+<p>您可以根据开发团队的需要分别使用merge和rebase。例如，想简化历史记录，</p>
+<ul>
+<li>在topic分支中更新merge分支的最新代码，请使用rebase。</li>
+<li>向merge分支导入topic分支的话，先使用rebase，再使用merge。</li>
+</ul>
+<p>一般的仓库分支</p>
+<p>主分支有两种：<strong>master分支</strong>和<strong>develop分支</strong></p>
+<ul>
+<li><strong>master</strong>master分支只负责管理发布的状态。在提交时使用标签记录发布版本号。</li>
+<li><strong>develop</strong>develop分支是针对发布的日常开发分支。刚才我们已经讲解过有合并分支的功用。</li>
+</ul>
+<p>特性分支就是我们在前面讲解过的<strong>topic分支</strong>的功用。</p>
+<p>这个分支是针对新功能的开发，在bug修正的时候从develop分支分叉出来的。基本上不需要共享特性分支的操作，所以不需要远端控制。完成开发后，把分支合并回develop分支后发布。</p>
+<p><strong>release分支</strong>是为release做准备的。通常会在分支名称的最前面加上release-。release前需要在这个分支进行最后的调整，而且为了下一版release开发用develop分支的上游分支。</p>
+<p>一般的开发是在develop分支上进行的，到了可以发布的状态时再创建release分支，为release做最后的bug修正。</p>
+<ul>
+<li>到了可以release的状态时，把release分支合并到master分支，并且在合并提交里添加release版本号的标签。</li>
+</ul>
+<p>要导入在release分支所作的修改，也要合并回develop分支。</p>
+<ul>
+<li><strong>hotFix分支</strong>是在发布的产品需要紧急修正时，从master分支创建的分支。通常会在分支名称的最前面加上 hotfix-。</li>
+</ul>
+<p>例如，在develop分支上的开发还不完整时，需要紧急修改。这个时候在develop分支创建可以发布的版本要花许多的时间，所以最好选择从master分支直接创建分支进行修改，然后合并分支。</p>
+<p>修改时创建的hotFix分支要合并回develop分支。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">确认项目目录的状态</span> </span><br><span class="line">git status </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">将修改过的文件添加到索引</span> </span><br><span class="line">git add &lt;file&gt; </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">将当前文件夹修改过的所有文件添加到索引</span></span><br><span class="line">git add . </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">提交修改过的文件</span> </span><br><span class="line">git commit -m &quot;提交修改过的文件123&quot; </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看提交记录</span> </span><br><span class="line">git log git log --graph --oneline </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">将修改文件推送到远程数据库</span> </span><br><span class="line">git push git push -u origin master #需要输入仓库的账户密码 </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">克隆远程数据库</span> </span><br><span class="line">git clone &lt;link&gt; </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">添加远程数据库</span> </span><br><span class="line">git remote add &lt;name&gt; &lt;link&gt; </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">从远程数据库拉取新数据</span> </span><br><span class="line">git pull git pull origin master </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">新建仓库分支</span> </span><br><span class="line">git branch &lt;name&gt; </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">显示仓库分支列表</span> </span><br><span class="line">git branch </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">切换分支</span> </span><br><span class="line">git checkout &lt;branchName&gt; </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">创建并切换分支</span> </span><br><span class="line">git checkout -b &lt;branchName&gt; </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">合并 issue1 分支到master 分支上</span> </span><br><span class="line">git checkout master git merge issue1 git </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">删除分支</span> </span><br><span class="line">git branch -d &lt;branchName&gt; </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">#并行操作分支</span></span> </span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git branch issue2</span> </span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git branch issue3</span>  </span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git checkout issue2</span> </span><br><span class="line">Switched to branch &#x27;issue2&#x27; </span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git branch</span> </span><br><span class="line">* issue2 </span><br><span class="line">  issue3 </span><br><span class="line">  master </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">合并冲突处理</span> </span><br><span class="line">git merge issues2 </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">手动修改冲突</span> </span><br><span class="line">git add &lt;file&gt; </span><br><span class="line">git commit -m &quot;sss&quot; </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">取消最新的合并</span> </span><br><span class="line">git reset --hard HEAD～ </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">使用rebase 合并</span> </span><br><span class="line">git rebase issues2 </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">修改冲突，添加rebase 说明</span> </span><br><span class="line">git add &lt;file&gt; </span><br><span class="line">git rebase --continue </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">确认本地数据库与远程数据库的历史记录</span> </span><br><span class="line">git fetch #会临时生成 FETCH_HEAD ，可以通过合并FETCH_HEAD或者重新pull 将远程内容合并到本地数据库 </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">给提交增加标签和注解</span> </span><br><span class="line">git tag &lt;tagName&gt; </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">显示包含标签的历史记录</span> </span><br><span class="line">git log --decorate </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">添加注解标签</span> </span><br><span class="line">git tag -a &lt;tagName&gt; </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">在HEAD指向的提交里添加名为banana的标签</span> </span><br><span class="line">git tag -am &quot;注解&quot; &lt;tagName&gt; </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">显示标签的列表和注解</span> </span><br><span class="line">git tag -n </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">删除标签</span> </span><br><span class="line">git tag -d &lt;tagName&gt; </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">修改最近的提交 指定amend选项执行提交的话，可以修改同一个分支最近的提交内容和注解。</span> </span><br><span class="line">git add &lt;file&gt; git commit --amend </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">取消过去的提交 在revert可以取消指定的提交内容。 使用后面要提到的rebase -i或reset也可以删除提交。 但是，不能随便删除已经发布的提交， 这时需要通过revert创建要否定的提交</span> </span><br><span class="line">git revert &lt;commitID&gt; </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">遗弃提交 在reset可以遗弃不再使用的提交。 执行遗弃时，需要根据影响的范围而指定不同的模式， 可以指定是否复原索引或工作树的内容。</span> </span><br><span class="line">git reset --hard &lt;commitID&gt; </span><br><span class="line">git reset --hard HEAD~~ </span><br><span class="line">git reset --hard ORIG_HEAD #reset 错了可以回滚 </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">提取提交 在cherry-pick，您可以从其他分支复制指定的提交，然后导入到现在的分支。</span> </span><br><span class="line">git cherry-pick &lt;commitID&gt; </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">如果发生冲突，修改冲突部分再提交</span> </span><br><span class="line">git add &lt;file&gt; </span><br><span class="line">git commit </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">改写提交的历史记录 合并两个commit 为一个commit 并提交</span></span><br><span class="line">git rebase -i HEAD~~ </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">pick 改为 squash 修改提交</span> </span><br><span class="line">git rebase -i HEAD～～ </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">pick 改为 edit</span> </span><br><span class="line">git add &lt;file&gt; git rebase --continue </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">实际上，在rebase之前的提交会以ORIG_HEAD之名存留。 如果rebase之后无法复原到原先的状态， 可以用git reset --hard ORIG_HEAD 复原到rebase之前的状态。</span></span><br><span class="line">git reset --hard ORIG_HEAD </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">从主分支汇合分支上的提交，然后一同合并到分支</span> </span><br><span class="line">git checkout master git merge --squash &lt;branchName&gt; </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">冲突的时候要先修改冲突代码，再提交</span> </span><br><span class="line">git add &lt;file&gt; git commit</span><br></pre></td></tr></table></figure>
+
+
+
+<p>–来自 <a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html">阮一峰的网络日志-常用 Git 命令清单</a></p>
+
+    </div>
+
+</div>
+                <div class="footer">
+    <span>Copyright © 2022 Winson-dev&#39;s blog</span>
+    <span>Theme Designed By <a target="_blank" href="https://zheli.design/one-paper">這Li</a></span>
+</div>
+
+
+<link rel="stylesheet" href="/myHexoDiary/css/a11y-dark.min.css">
+
+
+<script src="/myHexoDiary/js/highlight.min.js"></script>
+
+
+<script src="/myHexoDiary/js/highlightjs-line-numbers.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

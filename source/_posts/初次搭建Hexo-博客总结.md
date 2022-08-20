@@ -69,7 +69,6 @@ tags: Hexo 总结
    
    INFO  Cloning hexo-starter https://github.com/hexojs/hexo-starter.git
    INFO  Install dependencies
-   warning hexo-renderer-stylus > stylus > css > source-map-resolve@0.6.0: See https://github.com/lydell/source-map-resolve#deprecated
    INFO  Start blogging with Hexo!
    ```
 
@@ -86,7 +85,6 @@ tags: Hexo 总结
    初次使用，我们需要了解的文件和目录：
 
    - _config.yml 全局配置Hexo 博客的文件，使用yaml语法，配置时需要谨慎。
-
    - source 是存放博客文章的目录，文章都存在该目录下的post子目录
    - themes 是存放博客主题的目录
 

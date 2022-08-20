@@ -5,6 +5,9 @@ tags: Git
 ---
 
 
+
+
+
 Merge和rebase都是合并历史记录，但是各自的特征不同。
 
 -   **merge**保持修改内容的历史记录，但是历史记录会很复杂。
@@ -39,6 +42,41 @@ Merge和rebase都是合并历史记录，但是各自的特征不同。
 例如，在develop分支上的开发还不完整时，需要紧急修改。这个时候在develop分支创建可以发布的版本要花许多的时间，所以最好选择从master分支直接创建分支进行修改，然后合并分支。
 
 修改时创建的hotFix分支要合并回develop分支。
+
+
+
+
+**一个重点**
+将拉取回来的Git repo 从通过 https 提交改为通过 ssh 提交
+1. 进入本地仓库
+2. 编辑 .git 隐藏文件夹的config 配置文件
+
+```shell
+vim .git/config
+-------------
+[core]
+        repositoryformatversion = 0
+        filemode = true
+        bare = false
+        logallrefupdates = true
+[submodule]
+        active = .
+[remote "origin"]
+        #url = https://github.com/Winson-030/123.git
+        #直接将https 链接更换为 git链接
+        #记得提前配置好ssh 访问
+        url = git@github.com:Winson-030/123.git
+        fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "main"]
+        remote = origin
+        merge = refs/heads/main
+[lfs]
+        repositoryformatversion = 0
+```
+
+
+
+
 
 
 

@@ -4,9 +4,9 @@ date: 2022-08-20 16:14:30
 tags: Git
 ---
 
+> 建议在电脑端浏览，手机端浏览代码会有越界问题
 
-
-
+------
 
 `Merge`和`rebase`都是合并历史记录，但是各自的特征不同。
 
@@ -44,7 +44,7 @@ tags: Git
 修改时创建的hotFix分支要合并回develop分支。
 
 
-
+----------------
 
 **一个重点**
 将拉取回来的Git repo 从通过 https 提交改为通过 ssh 提交
@@ -76,7 +76,7 @@ vim .git/config
 
 
 
-
+----------------
 
 
 
@@ -85,7 +85,7 @@ vim .git/config
 git status 
 
 #将修改过的文件添加到索引 
-git add <file> 
+	git add <file> 
 
 #将当前文件夹修改过的所有文件添加到索引
 git add . 
